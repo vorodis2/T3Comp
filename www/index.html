@@ -1,0 +1,129 @@
+<!DOCTYPE html><html><head>
+<meta charset="UTF-8">
+<title>T3D</title>	
+<script src="build/divLib.js"></script>
+<script src="build/three99.js"></script>
+<script src="build/t3d.js"></script>
+
+
+<script src="build/TrackballControls.js"></script>
+<script src="build/pixi.js"></script>
+<script>
+	var trace = window.console.log.bind(window.console);
+	var dcmParam;
+
+	var camera, scene, renderer,controls;
+	var tStyle
+	var pObject
+
+
+
+
+	function init () {
+		window.onresize = sizeWindow;
+		dcmParam=new DCM();		
+		init3D();
+		this.dCont= new DCont(document.body);	
+		pObject=new DParamObject(this.dCont,2,2,function(){});	
+
+
+
+
+		initComp();
+		
+
+	}
+
+	function initComp () {
+
+
+		var loader = new THREE.FontLoader();
+		loader.load( 'resources/font/helvetiker_bold.typeface.json', function ( font ) {
+
+			tStyle=new TStyle();
+			tStyle.addFont(font);
+			//scene.rotation.x=Math.PI
+			
+			
+
+			
+			var label=new TLabel(scene, 0, 0, "111012345678,12126.709090340530450354");
+			pObject.addObject(label);
+
+
+		})
+
+
+
+
+
+
+		/*var aa=[];
+		var ww=222
+		for (var i = 0; i < 4; i++) {
+			aa[i]=new TLabel(scene, 0, 0, "Z");
+			aa[i].object3d.position.set(Math.random()*ww-ww/2,Math.random()*ww-ww/2,Math.random()*ww-ww/2)
+			aa[i].fontSize=5;
+		}
+
+
+		this.dCont= new DCont(document.body);	
+		this.slider=new DSliderBig(this.dCont, 0, 400, function(){
+			label.text=this.value+"";
+			for (var i = 0; i < aa.length; i++) {
+				aa[i].text=Math.random()+"";
+			}
+		}, "xz")
+
+
+		var arrow=new TArrow(scene, 0, 30);
+		pObject.addObject(arrow);*/
+
+	}
+
+
+	function plus (obj) {		
+		
+	}
+	
+
+	function sizeWindow () {	
+		var w=window.innerWidth-467
+		var h=window.innerHeight-38
+		this.camera.aspect = w / h;
+		this.camera.updateProjectionMatrix();
+		this.renderer.setSize(w, h);
+		this.intRend = 1;
+
+		
+	}
+
+	function init3D () {
+		camera = new THREE.PerspectiveCamera( 70, 400 / 400, 1, 1000 );
+		camera.position.z = 40;
+		scene = new THREE.Scene();
+		scene.add( new THREE.AmbientLight( 0xffffff, 0.8 ) );
+		renderer = new THREE.WebGLRenderer( { antialias: true } );
+		renderer.setPixelRatio( window.devicePixelRatio );		
+		renderer.setSize( 400, 400 );		
+		renderer.setClearColor(0x79bccc, 1);		
+		renderer.domElement.style.position = 'fixed';
+		renderer.domElement.style.top = '36px';
+		renderer.domElement.style.left = '465px';
+		document.body.appendChild( renderer.domElement );
+		controls = new THREE.TrackballControls( camera, renderer.domElement );
+		controls.minDistance = 100;
+		controls.maxDistance = 1300;
+
+		animate();
+		sizeWindow();
+	}
+	function animate() {
+		requestAnimationFrame(animate);
+		renderer.render( scene, camera);
+		controls.update();				
+	}
+
+
+
+</script></head><body onload="init()"></body></html>

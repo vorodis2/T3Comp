@@ -1,0 +1,5 @@
+#stats { position: absolute; top:0; left: 200px; }
+@font-face {
+  	font-family: 'Ruler Modern';
+  	src: url('RulerModern.ttf')  format('truetype');  
+}

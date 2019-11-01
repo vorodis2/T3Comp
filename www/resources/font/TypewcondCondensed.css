@@ -1,0 +1,5 @@
+#stats { position: absolute; top:0; left: 200px; }
+@font-face {
+  	font-family: 'Typewcond Condensed';
+  	src: url('TypewcondCondensed.otf')  format('truetype');  
+}
